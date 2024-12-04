@@ -1,0 +1,333 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
+<script>
+  function showUS() {
+    document.getElementById('predict').style.display = 'none'
+    document.getElementById('us').style.display = 'block'
+    document.getElementById('aus').style.display = 'none'
+    document.getElementById('can').style.display = 'none'
+    document.getElementById('china').style.display = 'none'
+    document.getElementById('india').style.display = 'none'
+    document.getElementById('mexico').style.display = 'none'
+  }
+  function showAUS() {
+    document.getElementById('predict').style.display = 'none'
+    document.getElementById('us').style.display = 'none'
+    document.getElementById('aus').style.display = 'block'
+    document.getElementById('can').style.display = 'none'
+    document.getElementById('china').style.display = 'none'
+    document.getElementById('india').style.display = 'none'
+    document.getElementById('mexico').style.display = 'none'
+  }
+  function showCAN() {
+    document.getElementById('predict').style.display = 'none'
+    document.getElementById('us').style.display = 'none'
+    document.getElementById('aus').style.display = 'none'
+    document.getElementById('can').style.display = 'block'
+    document.getElementById('china').style.display = 'none'
+    document.getElementById('india').style.display = 'none'
+    document.getElementById('mexico').style.display = 'none'
+  }
+  function showCHINA() {
+    document.getElementById('predict').style.display = 'none'
+    document.getElementById('us').style.display = 'none'
+    document.getElementById('aus').style.display = 'none'
+    document.getElementById('can').style.display = 'none'
+    document.getElementById('china').style.display = 'block'
+    document.getElementById('india').style.display = 'none'
+    document.getElementById('mexico').style.display = 'none'
+  }
+  function showINDIA() {
+    document.getElementById('predict').style.display = 'none'
+    document.getElementById('us').style.display = 'none'
+    document.getElementById('aus').style.display = 'none'
+    document.getElementById('can').style.display = 'none'
+    document.getElementById('china').style.display = 'none'
+    document.getElementById('india').style.display = 'block'
+    document.getElementById('mexico').style.display = 'none'
+  }
+  function showMEXICO() {
+    document.getElementById('predict').style.display = 'none'
+    document.getElementById('us').style.display = 'none'
+    document.getElementById('aus').style.display = 'none'
+    document.getElementById('can').style.display = 'none'
+    document.getElementById('china').style.display = 'none'
+    document.getElementById('india').style.display = 'none'
+    document.getElementById('mexico').style.display = 'block'
+  }
+  
+  
+
+
+  
+
+  
+  
+</script>
+</head>
+<body style="background-color:#e8f5e9;">
+
+<h2>Predicting values!</h2>
+<p>Move the mouse over the button to display all the Countries.</p>
+
+<div class="dropdown">
+  <button class="dropbtn">Countries</button>
+  <div class="dropdown-content">
+    <a href="#" onclick="showUS()">United States of America</a>
+    <a href="#" onclick="showAUS()">Australia</a>
+    <a href="#" onclick="showCAN()">Canada</a>
+    <a href="#" onclick="showCHINA()">China</a>
+    <a href="#" onclick="showINDIA()">India</a>
+    <a href="#" onclick="showMEXICO()">Mexico</a>
+  </div>
+</div>
+<p id="demo"></p>
+
+<!--
+<form id="us" style="display: none;" method="POST", action="{{url_for('US')}}">
+  Fertilizer Quantity: <input type="text" name="FQ"><br>
+  Machinery per agricultural land: <input type="text" name="ML"><br><br>
+  Available Agricultural Area: <input type="text" name="AA"><br><br>
+  Investment Index in agriculture equiment: <input type="text" name="IA"><br><br>
+  <input type="submit"  value="Predict">
+</form>
+--> 
+
+
+<!--
+<form id="us" style="display: none;" method="POST" action="{{url_for('US')}}">
+  <div class="mb-3">
+    <label for="fertilizer-quantity-us" class="form-label">Fertilizer Quantity:</label>
+    <input type="text" class="form-control" id="fertilizer-quantity-us" name="FQ">
+  </div>
+  <div class="mb-3">
+    <label for="machinery-land-us" class="form-label">Machinery per agricultural land:</label>
+    <input type="text" class="form-control" id="machinery-land-us" name="ML">
+  </div>
+  <div class="mb-3">
+    <label for="agricultural-area-us" class="form-label">Available Agricultural Area:</label>
+    <input type="text" class="form-control" id="agricultural-area-us" name="AA">
+  </div>
+  <div class="mb-3">
+    <label for="investment-agriculture-us" class="form-label">Investment Index in agriculture equipment:</label>
+    <input type="text" class="form-control" id="investment-agriculture-us" name="IA">
+  </div>
+  <button type="submit" class="btn btn-primary">Predict</button>
+</form>
+--> 
+
+<!--
+<form id="us" style="display: none;" method="POST" action="{{url_for('US')}}">
+  <div class="mb-3 row">
+    <label for="fertilizer-quantity-us" class="col-sm-4 col-form-label">Fertilizer Quantity:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="fertilizer-quantity-us" name="FQ">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="machinery-land-us" class="col-sm-4 col-form-label">Machinery per agricultural land:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="machinery-land-us" name="ML">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Predict</button>
+</form>
+--> 
+
+
+
+<form id="us" style="display: none;" method="POST" action="{{url_for('US')}}">
+  <div class="mb-3 row">
+    <label for="fertilizer-quantity-us" class="col-sm-4 col-form-label">Fertilizer Quantity (Tonnes):</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="fertilizer-quantity-us" name="FQ">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="machinery-land-us" class="col-sm-4 col-form-label">Number of Machinery per agricultural land:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="machinery-land-us" name="ML">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="agricultural-area-us" class="col-sm-4 col-form-label">Available Agricultural Area (Hectors):</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="agricultural-area-us" name="AA">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="investment-index-us" class="col-sm-4 col-form-label">Total area equppied with irrigation (per 1000 Hectares):</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="investment-index-us" name="IA">
+    </div>
+  </div>
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary">Predict</button>
+  </div>
+</form>
+
+
+<form id="aus" style="display: none;" method="POST" action="{{url_for('AUS')}}">
+  <div class="mb-3 row">
+    <label for="fertilizer-quantity-aus" class="col-sm-4 col-form-label">Fertilizer Quantity (Tonnes):</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="fertilizer-quantity-aus" name="FQ">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="machinery-land-aus" class="col-sm-4 col-form-label">Machinery per agricultural land:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="machinery-land-aus" name="ML">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="investment-index-aus" class="col-sm-4 col-form-label">Investment Index in agriculture equipment:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="investment-index-aus" name="II">
+    </div>
+  </div>
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary">Predict</button>
+  </div>
+</form>
+
+
+
+<form id="can" style="display: none;" method="POST" action="{{url_for('CAN')}}">
+  <div class="mb-3 row">
+    <label for="fertilizer-quantity-can" class="col-sm-4 col-form-label">Fertilizer Quantity (Tonnes):</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="fertilizer-quantity-can" name="FQ">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="machinery-land-can" class="col-sm-4 col-form-label">Machinery per agricultural land:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="machinery-land-can" name="ML">
+    </div>
+  </div>
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary">Predict</button>
+  </div>
+</form>
+
+
+
+
+<form id="china" style="display: none;" method="POST" action="{{url_for('CHINA')}}">
+  <div class="mb-3 row">
+    <label for="machinery-land-china" class="col-sm-4 col-form-label">Machinery per agricultural land:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="machinery-land-china" name="ML">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="agricultural-area-china" class="col-sm-4 col-form-label">Available Agricultural Area (Per 1000 hectares):</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="agricultural-area-china" name="AA">
+    </div>
+  </div>
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary">Predict</button>
+  </div>
+</form>
+
+<form id="india" style="display: none;" method="POST" action="{{url_for('INDIA')}}">
+  <div class="mb-3 row">
+    <label for="machinery-land-india" class="col-sm-4 col-form-label">Machinery per agricultural land:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="machinery-land-india" name="ML">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="agricultural-labour-index-india" class="col-sm-4 col-form-label">Agricultural Labour Index:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="agricultural-labour-index-india" name="AL">
+    </div>
+  </div>
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary">Predict</button>
+  </div>
+</form>
+
+
+<form id="mexico" style="display: none;" method="POST" action="{{url_for('MEXICO')}}">
+  <div class="mb-3 row">
+    <label for="fertilizer-quantity-mexico" class="col-sm-4 col-form-label">Fertilizer Quantity (Tonnes):</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="fertilizer-quantity-mexico" name="FQ">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="agricultural-area-mexico" class="col-sm-4 col-form-label">Available Agricultural Area (Per 1000 hectares):</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="agricultural-area-mexico" name="AA">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="agricultural-labour-index-mexico" class="col-sm-4 col-form-label">Agricultural Labour Index:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control form-control-sm" id="agricultural-labour-index-mexico" name="AL">
+    </div>
+  </div>
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary">Predict</button>
+  </div>
+</form>
+
+
+
+<br>
+<br>
+<b id="predict" style="display: block;">
+  {{ prediction_text }}
+
+</b>
+</body>
+</html>
+{% endblock %}

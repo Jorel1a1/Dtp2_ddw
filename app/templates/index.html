@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+<h1 class="display-1">Hi, {{ current_user.username }}!</h1>
+
+<p class="lead">Welcome to the Country Crop Predicting Model for Developing and Developed Countries!</p>
+<p class="lead">Navigate the webpage with the menu above to predict the crop Yield for a country.
+	<ul>
+		<li class="lead">We have 6 different countries that we can predict crop yield from!</li>
+		<li class="lead">By inputting our independent variables we can make a prediction of the crop production for each country! </li>
+		<li class="lead">We can also calculate the error rate for some of our values</li>
+	</ul>
+</p>{% endblock %}
